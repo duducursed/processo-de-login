@@ -1,0 +1,63 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+     public static void main(String[] args) {
+
+        // get RA
+        Random aleat = new Random();
+
+        Scanner leia = new Scanner(System.in);
+        System.out.print("Me informe o ano de sua inscrição para gerar o seu RA. ");
+        String ano = leia.nextLine();
+
+        int udn = aleat.nextInt(1000);
+
+        String ra = "128" + ano + String.format("%03d", udn);
+
+        System.out.println("O seu RA para login é: " + ra);
+
+        // get Password
+        System.out.print("Me informe o mês do seu nascimento para gerar a sua senha. ");
+        int month = leia.nextInt();
+        leia.nextLine(); // limpa o buffer
+
+        int passw = aleat.nextInt(1000);
+
+        String senha = String.format("%02d", month) + String.format("%03d", passw);
+
+        System.out.println("Sua senha para login é: " + senha);
+
+        // login
+
+        System.out.print("Processo de registro completo. Deseja iniciar o login? Digite Sim ou Não. ");
+        String resp = leia.nextLine();
+
+        if (resp.equals("Sim")) {
+            System.out.println("Processo de login iniciado.");
+
+            while (true) {
+                System.out.println("Digite seu RA: ");
+                String rares = leia.nextLine();
+                if (rares.equals(ra)) {
+                    System.out.println("Digite sua Senha: ");
+                    String senres = leia.nextLine();
+                    if (senres.equals(senha)) {
+                        System.out.println("Logado com sucesso!");
+                        break; // sai do loop while
+                    } else {
+                        System.out.println("Senha incorreta. Tente novamente.");
+                    }
+                } else {
+                    System.out.println("RA incorreto. Tente novamente.");
+                }
+            }
+
+        } else if (resp.equals("Não")) {
+            System.out.println("Processo de login encerrado.");
+        }
+
+    }
+
+}
